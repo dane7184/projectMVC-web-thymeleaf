@@ -1,0 +1,16 @@
+<section xmlns:th="http://www.thymeleaf.org">
+
+  <!-- card action ~ start -->
+  <div th:fragment="card-readonly(id, name, proflie)" class="card shadow-sm">
+    <div class="upper">
+      <img th:src="@{http://localhost:8080/files/{proflie}(proflie=${proflie})}" alt="My Card" class="bd-placeholder-img card-img-top img-fluid">
+    </div>
+
+    <div class="card-body">
+      <span th:text="${name}" class="card-text"></span>
+      <a th:href="@{/card/postCardAuthor/{id}(id=${id})}" type="button" class="btn btn-sm btn-outline-success">View</a>
+
+    </div>
+  </div>
+  <!-- card action ~ end -->
+</section>

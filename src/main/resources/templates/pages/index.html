@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/master-layout}">
+<head>
+    <title>Homepage</title>
+</head>
+<body>
+
+<main layout:fragment="main-content">
+
+    <!-- card ~ start -->
+
+    <div class="album py-5 bg-body-tertiary">
+        <div class="container ">
+            <div class="row">
+                <div class=" col-4 ">
+                    <img th:src="@{/resources/img/profile/dane.jpg}" alt="">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <a href="/article/category/game">
+                                Game
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="/article/category/study">
+                                Study
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="/article/category/love">
+                                Love
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="/article/category/music">
+                                Music
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class=" col-8 ">
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                        <div class="col" th:each="article : ${articles}" th:object="${article}">
+                            <div th:replace="~{fragments/card/cards :: card-readonly(*{uuid}, *{title}, *{thumbnail}, *{author}, *{text},*{index},*{category})}"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- card ~ end -->
+
+</main>
+
+</body>
+</html>

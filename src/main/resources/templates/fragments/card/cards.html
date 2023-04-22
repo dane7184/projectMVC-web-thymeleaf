@@ -1,0 +1,82 @@
+<section xmlns:th="http://www.thymeleaf.org">
+  <!-- card readonly ~ start -->
+  <a th:fragment="card-readonly(uuid, title, thumbnail, author, text,index, category)"
+     th:href="@{/article/{uuid}(uuid=${uuid})}" class="text-decoration-none">
+
+    <div class="container d-flex justify-content-center align-items-center">
+
+      <div class="card">
+
+        <div class="upper">
+
+          <img th:src="@{http://localhost:8080/files/{thumbnail}(thumbnail=${thumbnail})}" class="img-fluid">
+
+        </div>
+
+        <div class="user text-center">
+
+          <div class="profile">
+
+            <img th:src="@{http://localhost:8080/files/{thumbnail}(thumbnail=${author.profile})}" class="rounded-circle" width="80">
+
+          </div>
+        </div>
+
+        <div class="mt-5 text-center">
+          <h5 th:text="${title}" class="card-text mb-0"></h5>
+          <span th:text="${author.name}" class="text-muted d-block mb-2"></span>
+
+          <a th:href="@{/profileCard/{index}(index=${index})}" type="button" class="btn btn-sm btn-outline-success">View</a>
+
+          <div class="d-flex justify-content-between align-items-center mt-4 px-4">
+
+            <div class="stats">
+              <h6  class="mb-0">Followers</h6>
+              <span>8,797</span>
+            </div>
+
+            <div class="stats">
+              <h6 class="mb-0">Projects</h6>
+              <span>142</span>
+            </div>
+
+            <div class="stats">
+              <h6 class="mb-0">Ranks</h6>
+              <span>129</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </a>
+  <!-- card readonly ~ end -->
+
+  <!-- card action ~ start -->
+  <div th:fragment="card-action(uuid, title, thumbnail, author,text, index, category)" class="card shadow-sm">
+    <div class="upper">
+      <img th:src="@{http://localhost:8080/files/{thumbnail}(thumbnail=${thumbnail})}" alt="My Card" class="bd-placeholder-img card-img-top img-fluid">
+    </div>
+
+    <div class="upper">
+      <img th:src="@{http://localhost:8080/files/{thumbnail}(thumbnail=${author.profile})}" alt="My Card" class="rounded-circle "  width="80">
+    </div>
+
+    <div class="card-body">
+      <h5 th:text="${title}" class="card-text"></h5>
+      <h5 th:text="${category}" class="card-text"></h5>
+      <p th:text="${text}" class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="btn-group">
+          <a th:href="@{/profileCard/{index}(index=${index})}" type="button" class="btn btn-sm btn-outline-success">View</a>
+          <a href="#" type="button" class="btn btn-sm btn-outline-primary">Edit</a>
+          <a href="#" type="button" class="btn btn-sm btn-outline-danger">Delete</a>
+        </div>
+        <small th:text="${author.name}" class="text-body-secondary"></small>
+      </div>
+    </div>
+  </div>
+  <!-- card action ~ end -->
+</section>

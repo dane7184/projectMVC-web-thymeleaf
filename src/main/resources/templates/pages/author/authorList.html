@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/master-layout}">
+<head>
+  <title>Article</title>
+</head>
+<body>
+
+<main layout:fragment="main-content">
+  <!-- card ~ start -->
+  <div class="container mt-3">
+    <div class="row">
+      <div class="col-md-12">
+        <a href="/author/new" type="button" class="btn btn-primary mb-3">
+          <button type="button" class="btn ">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square-fill" viewBox="0 0 16 16">
+              <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z"></path>
+            </svg>
+            Add New Author
+          </button>
+        </a>
+      </div>
+    </div>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      <div th:each="author : ${authors}" th:object="${author}" class="col">
+        <div th:replace="~{fragments/card/authorCard :: card-readonly(*{id}, *{name}, *{profile})}"></div>
+
+      </div>
+
+    </div>
+  </div>
+  <!-- card ~ end -->
+</main>
+
+</body>
+</html>

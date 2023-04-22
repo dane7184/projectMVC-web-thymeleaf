@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="~{layout/master-layout}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<main layout:fragment="main-content">
+    <div class="container mt-3">
+        <h1>Create new article</h1>
+        <form th:action="@{/article/new}" method="post" th:object="${article}" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-6">
+
+                    <div class="mb-3">
+                        <label class="form-label" for="title">Title</label>
+                        <input th:field="*{title}" class="form-control" id="title" type="text">
+                        <div class="form-text text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label for="text" class="form-label">Description</label>
+<!--                        <textarea class="form-control" id="text"  placeholder="Enter description..." rows="5" name="description"></textarea>-->
+
+                        <label class="form-label" for="text">Description</label>
+                        <input th:field="*{text}" class="form-control" id="text" type="text">
+                        <div class="form-text text-danger" row="5" th:if="${#fields.hasErrors('text')}" th:errors="*{text}"></div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="row-cols-3 mb-3">
+                            <label class="form-label" >Category</label>
+                            <select th:field="*{category}" class="form-control" type="text">
+                                <option value="Game">Game</option>
+                                <option value="Study">Study</option>
+                                <option value="love">love</option>
+                                <option value="Music">Music</option>
+                            </select>
+                        </div>
+                        <div class="row-cols-3 mb-3">
+                            <label for="dropDownList">Author</label>
+                            <select th:field="*{author.id}" class="form-control" id="dropDownList" type="text">
+                                <option th:each="author : ${authorList}" th:value="${author.id}" th:text="${author.name}"></option>
+                            </select>
+
+                        </div>
+                    </div>
+
+
+                    <button class="btn btn-primary" type="submit">Save</button>
+                </div>
+                <div class="col-6">
+                    <div class="mb-3">
+                        <label for="thumbnailFile" class="form-label">Thumbnail</label>
+                        <input class="form-control" type="file" id="thumbnailFile" name="thumbnailFile">
+                        <img class="w-75 mt-2" id="placeholder" th:src="@{/resources/img/default/placeholder.jpg}" alt="your image" />
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>
+
+<th:block layout:fragment="subScript">
+    <script>
+        const thumbnailFile = document.getElementById("thumbnailFile")
+        const placeholder = document.getElementById("placeholder")
+
+        thumbnailFile.onchange = (evt) => {
+            const [file] = thumbnailFile.files
+            if (file){
+                placeholder.src= URL.createObjectURL(file)
+            }
+        }
+    </script>
+</th:block>
+
+</body>
+</html>
